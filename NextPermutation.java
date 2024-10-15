@@ -12,28 +12,44 @@ public class NextPermutation {
         }
     }
     
-    public void computeNextPermutation(int[] nums) {
-        int idx = -1;
-        for (int i = nums.length - 2; i >= 0; i--) {
-            if (nums[i] < nums[i + 1]) {
-                idx = i;
-                break;
-            }
+    public void computeNextPermutation(int[] arr) {
+        // int idx = -1;
+        // for (int i = nums.length - 2; i >= 0; i--) {
+        //     if (nums[i] < nums[i + 1]) {
+        //         idx = i;
+        //         break;
+        //     }
+        // }
+        // if (idx == -1) {
+        //     reverseArray(nums, 0, nums.length - 1);
+        // } else {
+        //     int minimum = idx + 1;
+        //     for (int i = idx + 1; i < nums.length; i++) {
+        //         if (nums[minimum] >= nums[i] && nums[idx] < nums[i] && nums[i] != 0) {
+        //             minimum = i;
+        //         }
+        //     }
+        //     int temp = nums[idx];
+        //     nums[idx] = nums[minimum];
+        //     nums[minimum] = temp;
+        //     reverseArray(nums, idx + 1, nums.length - 1);
+        // }
+        int i = arr.length - 2;
+        while (i >= 0 && arr[i] >= arr[i + 1]) {
+            i--;
         }
-        if (idx == -1) {
-            reverseArray(nums, 0, nums.length - 1);
-        } else {
-            int minimum = idx + 1;
-            for (int i = idx + 1; i < nums.length; i++) {
-                if (nums[minimum] >= nums[i] && nums[idx] < nums[i] && nums[i] != 0) {
-                    minimum = i;
-                }
+
+        if (i >= 0) {
+            int pos = arr.length - 1;
+            while (arr[pos] <= arr[i]) {
+                pos--;
             }
-            int temp = nums[idx];
-            nums[idx] = nums[minimum];
-            nums[minimum] = temp;
-            reverseArray(nums, idx + 1, nums.length - 1);
+
+            int temp = arr[i];
+            arr[i] = arr[pos];
+            arr[pos] = temp;
         }
+        reverseArray(arr, i + 1, arr.length - 1);
     }
 
     public static void main(String[] args) {
